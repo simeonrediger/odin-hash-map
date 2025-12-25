@@ -1,3 +1,1 @@
-# Base Template
-
-Complete setup with `node setup.js`
+# Odin Hash Map
