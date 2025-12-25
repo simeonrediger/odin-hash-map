@@ -4,8 +4,12 @@ export default class HashMap {
     static initialCapacity = 16;
     static #loadFactor = 0.75;
     #capacity = HashMap.initialCapacity;
-    #buckets = Array(this.#capacity).fill(null);
+    #buckets;
     #nodeCount = 0;
+
+    constructor() {
+        this.#createBuckets();
+    }
 
     #hash(key) {
         if (typeof key !== 'string') {
@@ -21,6 +25,11 @@ export default class HashMap {
         }
 
         return hash;
+    }
+
+    #createBuckets() {
+        this.#capacity = HashMap.initialCapacity;
+        this.#buckets = Array(this.#capacity).fill(null);
     }
 
     #grow() {
