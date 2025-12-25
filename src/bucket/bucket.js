@@ -17,7 +17,7 @@ export default class Bucket {
         return this.#tail;
     }
 
-    keys() {
+    nodes() {
         const nodes = [];
         let node = this.#head;
 
