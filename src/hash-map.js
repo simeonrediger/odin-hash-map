@@ -117,4 +117,16 @@ export default class HashMap {
 
         return values;
     }
+
+    entries() {
+        const entries = [];
+
+        for (const bucket of this.#buckets) {
+            for (const node of bucket.nodes()) {
+                entries.push([node.key, node.value]);
+            }
+        }
+
+        return entries;
+    }
 }
