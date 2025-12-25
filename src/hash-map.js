@@ -29,7 +29,7 @@ export default class HashMap {
 
     #resetBuckets() {
         this.#capacity = HashMap.initialCapacity;
-        this.#buckets = Array(this.#capacity).fill(null);
+        this.#buckets = Array(this.#capacity);
     }
 
     #grow() {
@@ -48,7 +48,7 @@ export default class HashMap {
         const bucketIndex = this.#getBucketIndex(key);
         let bucket = this.#buckets[bucketIndex];
 
-        if (bucket === null) {
+        if (!bucket) {
             bucket = new Bucket();
             this.#buckets[bucketIndex] = bucket;
         }
@@ -82,7 +82,7 @@ export default class HashMap {
         const removedNode = bucket?.remove(key);
 
         if (bucket.size === 0) {
-            this.#buckets[bucketIndex] = null;
+            this.#buckets[bucketIndex] = undefined;
         }
 
         if (removedNode) {
