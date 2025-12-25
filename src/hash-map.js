@@ -58,7 +58,7 @@ export default class HashMap {
         if (matchingNode) {
             matchingNode.value = value;
         } else {
-            if (++this.#nodeCount > this.#capacity) {
+            if (++this.#nodeCount > this.#capacity * HashMap.#loadFactor) {
                 this.#grow();
             }
 
