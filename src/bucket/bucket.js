@@ -1,6 +1,6 @@
 import Node from './node.js';
 
-export default class LinkedList {
+export default class Bucket {
     #size = 0;
     #head;
     #tail;
