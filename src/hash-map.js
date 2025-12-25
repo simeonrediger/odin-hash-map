@@ -1,7 +1,10 @@
+import Bucket from './linked-list/linked-list.js';
+
 export default class HashMap {
     static #loadFactor = 0.75;
     #capacity = 16;
     #buckets = Array(this.#capacity).fill(null);
+    #nodeCount = 0;
 
     #hash(key) {
         if (typeof key !== 'string') {
@@ -17,5 +20,33 @@ export default class HashMap {
         }
 
         return hash;
+    }
+
+    #grow() {
+        // TODO
+    }
+
+    #getBucket(key) {
+        return this.#buckets[this.#hash(key) % this.#capacity];
+    }
+
+    set(key, value) {
+        if (++this.#nodeCount > this.#capacity) {
+            this.#grow();
+        }
+
+        const bucket = this.#getBucket(key);
+
+        if (bucket === null) {
+            bucket = new Bucket();
+        }
+
+        const matchingNode = bucket.find(key);
+
+        if (matchingNode) {
+            matchingNode.value = value;
+        } else {
+            bucket.append(key, value);
+        }
     }
 }
