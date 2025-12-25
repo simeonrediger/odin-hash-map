@@ -73,11 +73,12 @@ export default class HashMap {
         if (matchingNode) {
             matchingNode.value = value;
         } else {
-            if (++this.#nodeCount > this.#capacity * HashMap.#loadFactor) {
+            if (this.#nodeCount + 1 > this.#capacity * HashMap.#loadFactor) {
                 this.#grow();
             }
 
             bucket.append(key, value);
+            this.#nodeCount++;
         }
     }
 
