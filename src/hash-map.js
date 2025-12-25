@@ -152,7 +152,8 @@ export default class HashMap {
         console.log(
             this.#buckets.map((bucket, i) => [
                 i,
-                bucket?.nodes().map(node => node.key) ?? bucket,
+                bucket?.nodes().map(node => `${node.key} -> ${node.value}`) ??
+                    bucket,
             ]),
         );
     }
