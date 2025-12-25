@@ -110,6 +110,20 @@ export default class LinkedList {
         return false;
     }
 
+    find(value) {
+        let node = this.#head;
+
+        while (node) {
+            if (node.value === value) {
+                return node;
+            }
+
+            node = node.nextNode;
+        }
+
+        return null;
+    }
+
     findIndex(value) {
         let node = this.#head;
 
