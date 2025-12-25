@@ -49,4 +49,9 @@ export default class HashMap {
             bucket.append(key, value);
         }
     }
+
+    get(key) {
+        const bucket = this.#getBucket(key);
+        return bucket?.find(key)?.value ?? null;
+    }
 }
