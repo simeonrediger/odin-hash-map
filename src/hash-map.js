@@ -78,11 +78,12 @@ export default class HashMap {
     }
 
     remove(key) {
-        const bucket = this.#getBucket(key);
-        const removedNode = bucket.remove(key);
+        const bucketIndex = this.#getBucketIndex(key);
+        const bucket = this.#buckets[bucketIndex];
+        const removedNode = bucket?.remove(key);
 
         if (bucket.size === 0) {
-            bucket = null;
+            this.#buckets[bucketIndex] = null;
         }
 
         if (removedNode) {
