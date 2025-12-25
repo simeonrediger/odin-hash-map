@@ -147,4 +147,8 @@ export default class HashMap {
 
         return entries;
     }
+
+    printTable() {
+        console.log(this.#buckets.map((bucket, i) => [i, bucket]));
+    }
 }
