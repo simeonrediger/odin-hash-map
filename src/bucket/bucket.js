@@ -10,38 +10,38 @@ export default class Bucket {
     }
 
     get head() {
-        return this.#head?.value;
+        return this.#head;
     }
 
     get tail() {
-        return this.#tail?.value;
+        return this.#tail;
     }
 
-    append(value) {
+    append(key, value) {
         if (this.#head) {
-            this.#tail.next = new Node(value);
+            this.#tail.next = new Node(key, value);
             this.#tail = this.#tail.next;
         } else {
-            this.#head = new Node(value);
+            this.#head = new Node(key, value);
             this.#tail = this.#head;
         }
 
         this.#size++;
     }
 
-    prepend(value) {
+    prepend(key, value) {
         if (this.#head) {
             const head = this.#head;
-            this.#head = new Node(value, head);
+            this.#head = new Node(key, value, head);
         } else {
-            this.#head = new Node(value);
+            this.#head = new Node(key, value);
             this.#tail = this.#head;
         }
 
         this.#size++;
     }
 
-    #nodeAt(index) {
+    at(index) {
         if (index < 0 || index >= this.#size) {
             return;
         } else if (index === this.#size - 1) {
@@ -57,10 +57,6 @@ export default class Bucket {
         return node ?? undefined;
     }
 
-    at(index) {
-        return this.#nodeAt(index)?.value;
-    }
-
     shift() {
         if (!this.#head) {
             return;
@@ -74,7 +70,7 @@ export default class Bucket {
             this.#tail = this.#head;
         }
 
-        return head.value;
+        return head;
     }
 
     pop() {
@@ -88,19 +84,19 @@ export default class Bucket {
             this.#tail = undefined;
         } else {
             tail = this.#tail;
-            this.#tail = this.#nodeAt(this.#size - 2);
+            this.#tail = this.at(this.#size - 2);
             this.#tail.next = null;
         }
 
         this.#size--;
-        return tail.value;
+        return tail;
     }
 
-    contains(value) {
+    contains(key) {
         let node = this.#head;
 
         while (node) {
-            if (node.value === value) {
+            if (node.key === key) {
                 return true;
             }
 
@@ -110,11 +106,11 @@ export default class Bucket {
         return false;
     }
 
-    find(value) {
+    find(key) {
         let node = this.#head;
 
         while (node) {
-            if (node.value === value) {
+            if (node.key === key) {
                 return node;
             }
 
@@ -124,11 +120,11 @@ export default class Bucket {
         return null;
     }
 
-    findIndex(value) {
+    findIndex(key) {
         let node = this.#head;
 
         for (let i = 0; node; i++) {
-            if (node.value === value) {
+            if (node.key === key) {
                 return i;
             }
 
@@ -138,16 +134,16 @@ export default class Bucket {
         return -1;
     }
 
-    insertAt(index, ...values) {
+    insertAt(index, ...entries) {
         if (index === 0) {
-            for (let i = values.length - 1; i >= 0; i--) {
-                this.prepend(values[i]);
+            for (let i = entries.length - 1; i >= 0; i--) {
+                this.prepend(...entries[i]);
             }
 
             return;
         } else if (index === this.#size) {
-            for (const value of values) {
-                this.append(value);
+            for (const entry of entries) {
+                this.append(...entry);
             }
 
             return;
@@ -157,11 +153,11 @@ export default class Bucket {
             );
         }
 
-        let prevNode = this.#nodeAt(index - 1);
+        let prevNode = this.at(index - 1);
 
-        for (const value of values) {
+        for (const entry of entries) {
             const nextNode = prevNode.next;
-            prevNode.next = new Node(value, nextNode);
+            prevNode.next = new Node(...entry);
             prevNode = prevNode.next;
             this.#size++;
         }
@@ -180,7 +176,7 @@ export default class Bucket {
             );
         }
 
-        const prevNode = this.#nodeAt(index - 1);
+        const prevNode = this.at(index - 1);
         prevNode.next = prevNode.next.next;
         this.#size--;
     }
@@ -190,7 +186,7 @@ export default class Bucket {
         let string = '';
 
         while (node) {
-            string += `( ${node.value} ) -> `;
+            string += `( ${node.key}: ${node.value} ) -> `;
             node = node.next;
         }
 
