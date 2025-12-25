@@ -1,8 +1,9 @@
 import Bucket from './linked-list/linked-list.js';
 
 export default class HashMap {
+    static initialCapacity = 16;
     static #loadFactor = 0.75;
-    #capacity = 16;
+    #capacity = HashMap.initialCapacity;
     #buckets = Array(this.#capacity).fill(null);
     #nodeCount = 0;
 
