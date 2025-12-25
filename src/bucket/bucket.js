@@ -17,6 +17,18 @@ export default class Bucket {
         return this.#tail;
     }
 
+    keys() {
+        const nodes = [];
+        let node = this.#head;
+
+        while (node) {
+            nodes.push(node);
+            node = node.next;
+        }
+
+        return nodes;
+    }
+
     append(key, value) {
         if (this.#head) {
             this.#tail.next = new Node(key, value);

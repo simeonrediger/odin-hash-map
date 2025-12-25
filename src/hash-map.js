@@ -93,4 +93,16 @@ export default class HashMap {
     clear() {
         this.#createBuckets();
     }
+
+    keys() {
+        const keys = [];
+
+        for (const bucket of this.#buckets) {
+            for (const node of bucket.nodes()) {
+                keys.push(node.key);
+            }
+        }
+
+        return keys;
+    }
 }
