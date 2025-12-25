@@ -27,14 +27,28 @@ export default class HashMap {
         return hash;
     }
 
-    #resetBuckets() {
-        this.#capacity = HashMap.initialCapacity;
+    #resetBuckets(resetCapacity = true) {
+        if (resetCapacity) {
+            this.#capacity = HashMap.initialCapacity;
+        }
+
         this.#buckets = Array(this.#capacity);
         this.#nodeCount = 0;
     }
 
     #grow() {
-        // TODO
+        this.#capacity *= 2;
+        this.#buckets.length = this.#capacity;
+        this.#rehash();
+    }
+
+    #rehash() {
+        const entries = this.entries();
+        this.#resetBuckets(false);
+
+        for (const [key, value] of entries) {
+            this.set(key, value);
+        }
     }
 
     #getBucket(key) {
