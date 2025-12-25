@@ -1,4 +1,4 @@
-import Bucket from './linked-list/linked-list.js';
+import Bucket from './bucket/bucket.js';
 
 export default class HashMap {
     static initialCapacity = 16;
