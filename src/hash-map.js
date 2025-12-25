@@ -49,10 +49,12 @@ export default class HashMap {
             this.#grow();
         }
 
-        let bucket = this.#getBucket(key);
+        const bucketIndex = this.#getBucketIndex(key);
+        let bucket = this.#buckets[bucketIndex];
 
         if (bucket === null) {
             bucket = new Bucket();
+            this.#buckets[bucketIndex] = bucket;
         }
 
         const matchingNode = bucket.find(key);
