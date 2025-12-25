@@ -8,7 +8,7 @@ export default class HashMap {
     #nodeCount = 0;
 
     constructor() {
-        this.#createBuckets();
+        this.#resetBuckets();
     }
 
     #hash(key) {
@@ -27,7 +27,7 @@ export default class HashMap {
         return hash;
     }
 
-    #createBuckets() {
+    #resetBuckets() {
         this.#capacity = HashMap.initialCapacity;
         this.#buckets = Array(this.#capacity).fill(null);
     }
@@ -97,7 +97,7 @@ export default class HashMap {
     }
 
     clear() {
-        this.#createBuckets();
+        this.#resetBuckets();
     }
 
     keys() {
