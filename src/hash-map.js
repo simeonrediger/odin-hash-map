@@ -75,10 +75,11 @@ export default class HashMap {
         } else {
             if (this.#nodeCount + 1 > this.#capacity * HashMap.#loadFactor) {
                 this.#grow();
+                this.set(key, value);
+            } else {
+                bucket.append(key, value);
+                this.#nodeCount++;
             }
-
-            bucket.append(key, value);
-            this.#nodeCount++;
         }
     }
 
