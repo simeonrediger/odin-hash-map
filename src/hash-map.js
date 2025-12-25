@@ -1,5 +1,5 @@
 export default class HashMap {
-    #loadFactor = 0.75;
+    static #loadFactor = 0.75;
     #capacity = 16;
 
     #hash(key) {
