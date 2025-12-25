@@ -1,4 +1,4 @@
-import HashMap from './hash-map/hash-map.js';
+import HashMap from './hash-map.js';
 
 const map = new HashMap();
 
