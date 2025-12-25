@@ -149,18 +149,13 @@ export default class HashMap {
     }
 
     printTable() {
-        let lastPrintedIndex = -1;
-
-        for (const [i, bucket] of Object.entries(this.#buckets)) {
-            for (let j = lastPrintedIndex + 1; j < i; j++) {
-                console.log(`${j}:`.padStart(Math.log(this.size) + 1));
-            }
-            lastPrintedIndex = Number(i);
+        for (let i = 0; i < this.#capacity; i++) {
+            const bucket = this.#buckets[i];
 
             console.log(
                 `${i}:`.padStart(Math.log(this.size) + 1),
                 bucket?.nodes().map(node => `${node.key} -> ${node.value}`) ??
-                    bucket,
+                    '',
             );
         }
     }
