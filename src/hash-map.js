@@ -88,7 +88,7 @@ export default class HashMap {
 
     has(key) {
         const bucket = this.#getBucket(key);
-        return bucket.contains(key);
+        return bucket?.contains(key) ?? false;
     }
 
     delete(key) {
