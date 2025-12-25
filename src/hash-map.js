@@ -45,10 +45,6 @@ export default class HashMap {
     }
 
     set(key, value) {
-        if (++this.#nodeCount > this.#capacity) {
-            this.#grow();
-        }
-
         const bucketIndex = this.#getBucketIndex(key);
         let bucket = this.#buckets[bucketIndex];
 
@@ -62,8 +58,11 @@ export default class HashMap {
         if (matchingNode) {
             matchingNode.value = value;
         } else {
+            if (++this.#nodeCount > this.#capacity) {
+                this.#grow();
+            }
+
             bucket.append(key, value);
-            this.#nodeCount++;
         }
     }
 
