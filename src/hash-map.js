@@ -1,6 +1,7 @@
 export default class HashMap {
     static #loadFactor = 0.75;
     #capacity = 16;
+    #buckets = Array(this.#capacity).fill(null);
 
     #hash(key) {
         if (typeof key !== 'string') {
