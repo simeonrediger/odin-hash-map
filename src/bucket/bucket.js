@@ -19,8 +19,8 @@ export default class Bucket {
 
     append(value) {
         if (this.#head) {
-            this.#tail.nextNode = new Node(value);
-            this.#tail = this.#tail.nextNode;
+            this.#tail.next = new Node(value);
+            this.#tail = this.#tail.next;
         } else {
             this.#head = new Node(value);
             this.#tail = this.#head;
@@ -51,7 +51,7 @@ export default class Bucket {
         let node = this.#head;
 
         for (let i = 0; i < index && node; i++) {
-            node = node.nextNode;
+            node = node.next;
         }
 
         return node ?? undefined;
@@ -67,7 +67,7 @@ export default class Bucket {
         }
 
         const head = this.#head;
-        this.#head = head.nextNode;
+        this.#head = head.next;
         this.#size--;
 
         if (this.#size === 0) {
@@ -89,7 +89,7 @@ export default class Bucket {
         } else {
             tail = this.#tail;
             this.#tail = this.#nodeAt(this.#size - 2);
-            this.#tail.nextNode = null;
+            this.#tail.next = null;
         }
 
         this.#size--;
@@ -104,7 +104,7 @@ export default class Bucket {
                 return true;
             }
 
-            node = node.nextNode;
+            node = node.next;
         }
 
         return false;
@@ -118,7 +118,7 @@ export default class Bucket {
                 return node;
             }
 
-            node = node.nextNode;
+            node = node.next;
         }
 
         return null;
@@ -132,7 +132,7 @@ export default class Bucket {
                 return i;
             }
 
-            node = node.nextNode;
+            node = node.next;
         }
 
         return -1;
@@ -160,9 +160,9 @@ export default class Bucket {
         let prevNode = this.#nodeAt(index - 1);
 
         for (const value of values) {
-            const nextNode = prevNode.nextNode;
-            prevNode.nextNode = new Node(value, nextNode);
-            prevNode = prevNode.nextNode;
+            const nextNode = prevNode.next;
+            prevNode.next = new Node(value, nextNode);
+            prevNode = prevNode.next;
             this.#size++;
         }
     }
@@ -181,7 +181,7 @@ export default class Bucket {
         }
 
         const prevNode = this.#nodeAt(index - 1);
-        prevNode.nextNode = prevNode.nextNode.nextNode;
+        prevNode.next = prevNode.next.next;
         this.#size--;
     }
 
@@ -191,7 +191,7 @@ export default class Bucket {
 
         while (node) {
             string += `( ${node.value} ) -> `;
-            node = node.nextNode;
+            node = node.next;
         }
 
         if (node === null) {
