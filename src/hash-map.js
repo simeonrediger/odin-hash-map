@@ -149,6 +149,11 @@ export default class HashMap {
     }
 
     printTable() {
-        console.log(this.#buckets.map((bucket, i) => [i, bucket]));
+        console.log(
+            this.#buckets.map((bucket, i) => [
+                i,
+                bucket?.nodes().map(node => node.key) ?? bucket,
+            ]),
+        );
     }
 }
