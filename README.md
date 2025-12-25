@@ -1,3 +1,3 @@
 # Odin Hash Map
 
-A basic hash map implementation.
+Basic hash map and hash set implementations.
