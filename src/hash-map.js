@@ -98,6 +98,10 @@ export default class HashMap {
         const keys = [];
 
         for (const bucket of this.#buckets) {
+            if (!bucket) {
+                continue;
+            }
+
             for (const node of bucket.nodes()) {
                 keys.push(node.key);
             }
@@ -110,6 +114,10 @@ export default class HashMap {
         const values = [];
 
         for (const bucket of this.#buckets) {
+            if (!bucket) {
+                continue;
+            }
+
             for (const node of bucket.nodes()) {
                 values.push(node.value);
             }
@@ -122,6 +130,10 @@ export default class HashMap {
         const entries = [];
 
         for (const bucket of this.#buckets) {
+            if (!bucket) {
+                continue;
+            }
+
             for (const node of bucket.nodes()) {
                 entries.push([node.key, node.value]);
             }
