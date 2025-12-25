@@ -37,7 +37,11 @@ export default class HashMap {
     }
 
     #getBucket(key) {
-        return this.#buckets[this.#hash(key) % this.#capacity];
+        return this.#buckets[this.#getBucketIndex(key)];
+    }
+
+    #getBucketIndex(key) {
+        return this.#hash(key) % this.#capacity;
     }
 
     set(key, value) {
