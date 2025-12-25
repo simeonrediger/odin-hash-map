@@ -47,6 +47,7 @@ export default class HashMap {
             matchingNode.value = value;
         } else {
             bucket.append(key, value);
+            this.#nodeCount++;
         }
     }
 
@@ -66,6 +67,10 @@ export default class HashMap {
 
         if (bucket.size === 0) {
             bucket = null;
+        }
+
+        if (removedNode) {
+            this.#nodeCount--;
         }
 
         return Boolean(removedNode);
