@@ -30,6 +30,7 @@ export default class HashMap {
     #resetBuckets() {
         this.#capacity = HashMap.initialCapacity;
         this.#buckets = Array(this.#capacity);
+        this.#nodeCount = 0;
     }
 
     #grow() {
