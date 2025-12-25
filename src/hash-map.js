@@ -89,4 +89,8 @@ export default class HashMap {
     get size() {
         return this.#nodeCount;
     }
+
+    clear() {
+        this.#createBuckets();
+    }
 }
