@@ -52,7 +52,17 @@ export default class HashMap {
     }
 
     #getBucket(key) {
-        return this.#buckets[this.#getBucketIndex(key)];
+        return this.#getBucketByIndex(this.#getBucketIndex(key));
+    }
+
+    #getBucketByIndex(index) {
+        if (index < 0 || index >= this.#capacity) {
+            throw new Error(
+                `Index must be in the range [0, ${this.#capacity}).`,
+            );
+        }
+
+        return this.#buckets[index];
     }
 
     #getBucketIndex(key) {
@@ -61,7 +71,7 @@ export default class HashMap {
 
     set(key) {
         const bucketIndex = this.#getBucketIndex(key);
-        let bucket = this.#buckets[bucketIndex];
+        let bucket = this.#getBucketByIndex(bucketIndex);
 
         if (!bucket) {
             bucket = new Bucket();
@@ -90,7 +100,7 @@ export default class HashMap {
 
     delete(key) {
         const bucketIndex = this.#getBucketIndex(key);
-        const bucket = this.#buckets[bucketIndex];
+        const bucket = this.#getBucketByIndex(bucketIndex);
         const removedNode = bucket?.remove(key);
 
         if (bucket?.size === 0) {
