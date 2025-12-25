@@ -14,5 +14,6 @@ map.set('ice cream', 'white');
 map.set('jacket', 'blue');
 map.set('kite', 'pink');
 map.set('lion', 'golden');
+map.set('moon', 'silver');
 
 map.printTable();
