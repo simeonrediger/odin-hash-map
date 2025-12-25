@@ -75,4 +75,8 @@ export default class HashMap {
 
         return Boolean(removedNode);
     }
+
+    get size() {
+        return this.#nodeCount;
+    }
 }
