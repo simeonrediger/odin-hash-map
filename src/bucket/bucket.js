@@ -163,6 +163,32 @@ export default class Bucket {
         }
     }
 
+    remove(key) {
+        const node = this.find(key);
+
+        if (!node) {
+            return;
+        }
+
+        if (node === this.#head) {
+            return this.shift();
+        }
+
+        if (node === this.#tail) {
+            return this.pop();
+        }
+
+        const currentNode = this.#head;
+
+        while (currentNode) {
+            if (currentNode.key === key) {
+                return currentNode;
+            }
+
+            currentNode = currentNode.next;
+        }
+    }
+
     removeAt(index) {
         if (index === 0) {
             this.shift();

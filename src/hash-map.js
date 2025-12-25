@@ -59,4 +59,15 @@ export default class HashMap {
         const bucket = this.#getBucket(key);
         return bucket.contains(key);
     }
+
+    remove(key) {
+        const bucket = this.#getBucket(key);
+        const removedNode = bucket.remove(key);
+
+        if (bucket.size === 0) {
+            bucket = null;
+        }
+
+        return Boolean(removedNode);
+    }
 }
