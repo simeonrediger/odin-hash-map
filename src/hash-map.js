@@ -76,7 +76,7 @@ export default class HashMap {
         return bucket.contains(key);
     }
 
-    remove(key) {
+    delete(key) {
         const bucketIndex = this.#getBucketIndex(key);
         const bucket = this.#buckets[bucketIndex];
         const removedNode = bucket?.remove(key);
