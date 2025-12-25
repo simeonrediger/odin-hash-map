@@ -96,7 +96,7 @@ export default class HashMap {
         const bucket = this.#buckets[bucketIndex];
         const removedNode = bucket?.remove(key);
 
-        if (bucket.size === 0) {
+        if (bucket?.size === 0) {
             this.#buckets[bucketIndex] = undefined;
         }
 
