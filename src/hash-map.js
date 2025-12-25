@@ -45,7 +45,7 @@ export default class HashMap {
             this.#grow();
         }
 
-        const bucket = this.#getBucket(key);
+        let bucket = this.#getBucket(key);
 
         if (bucket === null) {
             bucket = new Bucket();
