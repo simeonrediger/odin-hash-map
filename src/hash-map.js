@@ -105,4 +105,16 @@ export default class HashMap {
 
         return keys;
     }
+
+    values() {
+        const values = [];
+
+        for (const bucket of this.#buckets) {
+            for (const node of bucket.nodes()) {
+                values.push(node.value);
+            }
+        }
+
+        return values;
+    }
 }
