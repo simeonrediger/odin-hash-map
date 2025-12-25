@@ -54,4 +54,9 @@ export default class HashMap {
         const bucket = this.#getBucket(key);
         return bucket?.find(key)?.value ?? null;
     }
+
+    has(key) {
+        const bucket = this.#getBucket(key);
+        return bucket.contains(key);
+    }
 }
