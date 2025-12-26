@@ -176,14 +176,20 @@ export default class HashMap {
     }
 
     printTable() {
+        const indexPadding = Math.log(this.#capacity) / Math.log(10) + 1;
+
         for (let i = 0; i < this.#capacity; i++) {
             const bucket = this.#buckets[i];
+            const paddedIndex = String(i).padStart(indexPadding);
+            const bucketNodes = bucket
+                ?.nodes()
+                .map(node => `(${node.key} : ${node.value})`)
+                .join(' -> ');
 
-            console.log(
-                `${i}:`.padStart(Math.log(this.size) + 1),
-                bucket?.nodes().map(node => `${node.key} -> ${node.value}`) ??
-                    '',
-            );
+            console.log(`${paddedIndex}: ${bucketNodes ? bucketNodes : ''}`);
         }
+
+        console.log();
+        console.log(indexPadding);
     }
 }
